@@ -12,8 +12,9 @@
 决赛阶段：预测2020年6月的数据
 数据字段描述如下：
 
-注1：初赛的测试集中，不存在arpu_201908、arpu_201909……arpu_202003等字段，取而代之的是arpu_202004这1个字段。
-    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_user.png)
+注1：初赛的测试集中，不存在arpu_201908、arpu_201909……arpu_202003等字段，取而代之的是arpu_202004这1个字段。     
+   
+   ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_user.png)
     ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_voc.png)
     ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_sms.png)
     ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_app.png)
