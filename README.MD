@@ -13,10 +13,10 @@
 数据字段描述如下：
 
 注1：初赛的测试集中，不存在arpu_201908、arpu_201909……arpu_202003等字段，取而代之的是arpu_202004这1个字段。
-    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/master/IMG/train_user.png)
-    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/master/IMG/train_voc.png)
-    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/master/IMG/train_sms.png)
-    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/master/IMG/train_app.png)
+    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_user.png)
+    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_voc.png)
+    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_sms.png)
+    ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/train_app.png)
     
 2.数据分析：
 本次比赛的初赛训练集数据到3月份，测试集数据为4月份，复赛中将初赛测试集数据作为新的训练数据，预测5月的测试集数据。具体的数据统计在html_初赛，html_复赛中，常规的对每一个数据表进行统计，统计每个表的每一列的相关统计特征，比如缺失值情况，数值类型，数值分布，方差等等，对数据有个整体的映象，同时查看是否有一些异常的情况，这些异常情况可能需要删除或者属于强特可以加以利用。比如在本次比赛中，'arpu_xx'字段，通过将所有正样本取出查看，可以发现绝大部分都是缺失的，通过在模型预测结果完毕后，增加后处理的方式，将缺失样本预测结果强制转换为1，可以使得线上成绩有明显的提升，复赛初赛都有效果。前期的数据分析主要就是这个作用，一方面了解数据概况，另一方面发现一些小异常，保证和其他选手在同一起跑线上面。在训练集样本的处理上，初赛中，基本做法就这2种方式：1.只取arpu3月份的数据作为特征训练模型，保证模型的时效性，训练的数据分布能够和测试数据保持一致。2.划窗的方式，每个月数据作为一个新样本，扩大训练样本集8倍。我选择了第一种方式，并且赛后线上成绩公布，我的分数基本上线上线下相同，没有抖动，因此成绩有所上升。第二种方法我也尝试了下，线下分数暴涨，线上降分，我觉得应该是划窗所得的样本，在train_user特征表中大部分特征是相同的，即便划窗也只是其他几个表里的特征有所变化，但是本次比赛最重要的特征就在用户基础特征表里面，划窗并没有提供更加丰富的特征信息，因此只是导致了线下过拟合，效果并不好。而在复赛中，新增加的4月份数据分布更是与前面的不同，因此复赛中我也只使用了4月份的数据训练，并且4月份的数据分布与5月份有差异，导致直接使用初赛的特征工程会过拟合，不过当时没有时间做过多处理，就只使用了voc表做了一些特征改善，因为这个表的数据分布基本上和5月份一致。后面复赛结果b榜抖动在一个百，小于前排一些选手的抖动也证明了这个问题。
@@ -46,5 +46,5 @@ app表个人感觉很重要，但是一直没有挖掘到比较有用的特征�
 这次比赛重点还是特征工程上面，有效的特征工程才能够带来实质的提升，反而模型参数和一些骚操作无法带来实质的效果，另外w2v还要好好学习下如何有效的和树模型配合使用。app表里面的序列特征应该是有办法好好挖掘下的，后面如果想到好办法再回来补充下。通过这次比赛，对于电话诈骗业务场景有了更多的认识，希望以后别被诈骗，最近接这种电话越来越多了。
 附上模型训练后五折的特征重要性图片：
 
-   ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/master/IMG/importances.png)
+   ![输入图片说明](https://github.com/AiIsBetter/sichuan_voice_phishing2020/blob/main/IMG/importances.png)
 
